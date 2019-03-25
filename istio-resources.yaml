@@ -1,0 +1,56 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: superapp
+spec:
+  selector:
+    istio: ingressgateway # use Istio default gateway implementation
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+---
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: superapp
+spec:
+  host: superapp
+  subsets:
+  - name: superapp-dudes
+    labels:
+      sucks: sucks1
+  - name: superapp-pidars
+    labels:
+      sucks: sucks2
+---      
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: superapp
+spec:
+  gateways:
+    - superapp # namespace of the Gateway
+  hosts:
+    - superapp.com    
+  http:
+  - match:
+    - uri:
+        prefix: /greeting
+    route:
+    - destination:
+        port:
+          number: 8090
+        host: superapp
+        subset: superapp-dudes
+      weight: 10  
+    - destination:
+        port:
+          number: 8090
+        host: superapp     
+        subset: superapp-pidars   
+      weight: 90  

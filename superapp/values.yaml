@@ -1,0 +1,7 @@
+image:
+  repository: eugeneflexagon/superapp
+  tag: latest
+service:
+  port: 8090
+
+  

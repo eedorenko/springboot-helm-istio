@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: superapp
+  labels:
+     app: superapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+       app: superapp
+  template:
+    metadata:
+       labels: 
+         app: superapp
+    spec:
+      containers: 
+        - name: superapp
+          image: eugeneflexagon/superapp:latest
+          ports: 
+            - containerPort: 8080
+
+             
