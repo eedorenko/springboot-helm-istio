@@ -1,7 +1,7 @@
 image:
-  repository: eugeneflexagon/superapp
-  tag: latest
+  name: eugeneflexagon/superapp:latest
 service:
   port: 8090
-
+deployment:
+  name: superapp
   

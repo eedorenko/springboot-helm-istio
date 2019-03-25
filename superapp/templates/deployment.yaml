@@ -19,6 +19,6 @@ spec:
     spec:
       containers: 
         - name: superapp
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          image: "{{ .Values.image.name }}"
           ports: 
             - containerPort: 8080
